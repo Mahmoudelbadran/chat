@@ -3,6 +3,7 @@ import 'package:ahmedtestapp/presentation/screens/splash_screen/splash_screen.da
 import 'package:flutter/material.dart';
 
 import '../../core/change_page/change_page.dart';
+import '../screens/test_screen/test_screen.dart';
 
 
 class AppRouter{
@@ -14,6 +15,8 @@ class AppRouter{
         return MaterialPageRoute(builder: (_)=>startPage);
       case homeScreen:
             return MaterialPageRoute(builder: (_)=>const HomeScreen());
+      case testScreen:
+        return MaterialPageRoute(builder: (_)=>const TestScreen());
       default:
         return null;
     }
