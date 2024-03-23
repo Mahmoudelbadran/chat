@@ -26,17 +26,19 @@ class _TestScreenState extends State<TestScreen> {
         ),
       ),
       body: SizedBox(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CircleAvatar(
-              backgroundColor: Colors.white,
-              backgroundImage: AssetImage(widget.image),
-              radius: 50.sp,
-            ),
-            Text(widget.name,style: TextStyle(color: Colors.white,fontWeight: FontWeight.w700,fontSize: 20.sp),)
-          ],
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CircleAvatar(
+                backgroundColor: Colors.white,
+                backgroundImage: AssetImage(widget.image),
+                radius: 50.sp,
+              ),
+              Text(widget.name,style: TextStyle(color: Colors.white,fontWeight: FontWeight.w700,fontSize: 20.sp),)
+            ],
+          ),
         ),
       ),
 
