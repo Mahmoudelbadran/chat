@@ -14,7 +14,7 @@ class ChatView extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Navigator.pushNamed(context, testScreen);
+        Navigator.pushNamed(context, testScreen,arguments: [name,image]);
       },
       child: Container(
         margin: EdgeInsets.all(10.sp),

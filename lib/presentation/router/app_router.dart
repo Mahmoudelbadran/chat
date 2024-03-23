@@ -16,7 +16,8 @@ class AppRouter{
       case homeScreen:
             return MaterialPageRoute(builder: (_)=>const HomeScreen());
       case testScreen:
-        return MaterialPageRoute(builder: (_)=>const TestScreen());
+        List<String> data=settings.arguments as List<String>;
+        return MaterialPageRoute(builder: (_)=> TestScreen(image: data[1], name: data[0],));
       default:
         return null;
     }

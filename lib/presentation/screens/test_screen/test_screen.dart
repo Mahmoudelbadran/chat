@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 class TestScreen extends StatefulWidget {
-  const TestScreen({Key? key}) : super(key: key);
+  final String image;
+  final String name;
+  const TestScreen({Key? key, required this.image, required this.name}) : super(key: key);
 
   @override
   State<TestScreen> createState() => _TestScreenState();
@@ -25,20 +27,15 @@ class _TestScreenState extends State<TestScreen> {
       ),
       body: SizedBox(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Checkbox(value: value,
-                onChanged: (x){
-                 setState(() {
-                   value=x!;
-                 });
-            },
-              checkColor: Colors.white,
-              activeColor: Colors.red,
-
-
+            CircleAvatar(
+              backgroundColor: Colors.white,
+              backgroundImage: AssetImage(widget.image),
+              radius: 50.sp,
             ),
+            Text(widget.name,style: TextStyle(color: Colors.white,fontWeight: FontWeight.w700,fontSize: 20.sp),)
           ],
         ),
       ),
