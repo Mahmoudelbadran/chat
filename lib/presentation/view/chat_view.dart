@@ -61,6 +61,10 @@ class ChatView extends StatelessWidget {
             Expanded(
               child: Visibility(
                 visible:state ,
+                replacement: CircleAvatar(
+                  backgroundColor: Colors.red,
+                  radius: 5.sp,
+                ),
                 child: CircleAvatar(
                   backgroundColor: Colors.green,
                   radius: 5.sp,

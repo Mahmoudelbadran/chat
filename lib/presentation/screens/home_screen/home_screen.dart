@@ -1,5 +1,8 @@
+import 'package:ahmedtestapp/business_logic/home_logic/home_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../view/chat_view.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -9,6 +12,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late HomeLogic cubit;
+  @override
+  void initState() {
+   cubit=HomeLogic.get(context);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,48 +107,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
        body:SizedBox(
          child:ListView.builder(
-           itemCount: 5,
-           itemBuilder: (context,index)=> Container(
-           margin: EdgeInsets.all(10.sp),
-           width: 100.w,
-           height: 10.h,
-           decoration: BoxDecoration(
-             color: Colors.black,
-             boxShadow: [
-               BoxShadow(color: Colors.white,blurRadius: 10.sp)
-             ],
-           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  backgroundImage: const AssetImage("images/profile.jpg"),
-                  radius: 23.sp,
-                ),
-              ),
-              Expanded(
-                flex: 2,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Ahmed Omar",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w700,fontSize: 15.sp),),
-                    Text("Hello,Mahmoud",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w500,fontSize: 11.sp),),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: CircleAvatar(
-                  backgroundColor: Colors.green,
-                  radius: 5.sp,
-                ),
-              ),
-            ],
-          ),
-         ),
+           itemCount: cubit.data.length,
+           itemBuilder: (context,index)=>  ChatView(name:cubit.data[index]['name'],msg:cubit.data[index]['msg'],image:cubit.data[index]['image'],state:cubit.data[index]['state']),
          )
        ) ,
     );

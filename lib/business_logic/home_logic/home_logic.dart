@@ -30,6 +30,7 @@ class HomeLogic extends Cubit<HomeState> {
     }
 
   ];
+
 void addChat({required String name,required String msg,required String image,required bool state}){
   data.add({
     "name":name,
