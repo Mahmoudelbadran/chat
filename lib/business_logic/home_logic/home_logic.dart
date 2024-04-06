@@ -40,6 +40,14 @@ void addChat({required String name,required String msg,required String image,req
   });
   emit(AddState());
 }
+String image="images/x.png";
+void games(int index){
+  if(index==0){
+   image="images/x.png";
+  }else if(index==1){
+    image="images/o.png";
+  }
+}
 
 
 

@@ -1,8 +1,10 @@
 import 'package:ahmedtestapp/business_logic/home_logic/home_logic.dart';
+import 'package:ahmedtestapp/core/change_page/change_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../view/add_chat_view.dart';
 import '../../view/chat_view.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,6 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   TextEditingController name = TextEditingController();
   TextEditingController msg = TextEditingController();
   TextEditingController user = TextEditingController();
+ final GlobalKey<FormState> _key=GlobalKey<FormState>();
   late HomeLogic cubit;
   @override
   void initState() {
@@ -50,11 +53,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           centerTitle: true,
           actions: [
-            Icon(
-              Icons.add_a_photo,
-              size: 20.sp,
-              color: Colors.white,
-            ),
+            IconButton(onPressed: (){
+              Navigator.pushNamed(context, homeFaceBook);
+            }, icon: const Icon(Icons.pages_rounded,color: Colors.white,)),
             Icon(
               Icons.add,
               size: 20.sp,
@@ -121,155 +122,10 @@ class _HomeScreenState extends State<HomeScreen> {
           onPressed: () {
             showDialog(
                 context: context,
-                builder: (context) => AlertDialog(
-                  backgroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(0)
-                      ),
-                      title: Text(
-                        "ADD Chat",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.green,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      content: SizedBox(
-                        width: 80.w,
-                        height: 30.h,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.all(5.sp),
-                              child: TextFormField(
-                                controller: name,
-                                keyboardType: TextInputType.text,
-                                maxLines: 1,
-                                style: const TextStyle(color: Colors.black),
-                                decoration: InputDecoration(
-                                  label: const Text("username"),
-                                  labelStyle:
-                                      const TextStyle(color: Colors.blue),
-                                  prefixIcon: const Icon(
-                                    Icons.person,
-                                    color: Colors.blue,
-                                  ),
-                                  border: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.black, width: 1.sp),
-                                      borderRadius:
-                                          BorderRadius.circular(15.sp)),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.blue, width: 1.sp),
-                                      borderRadius:
-                                          BorderRadius.circular(15.sp)),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(5.sp),
-                              child: TextFormField(
-                                controller: msg,
-                                keyboardType: TextInputType.text,
-                                maxLines: 1,
-                                style: const TextStyle(color: Colors.black),
-                                decoration: InputDecoration(
-                                  label: const Text("Message"),
-                                  labelStyle:
-                                      const TextStyle(color: Colors.blue),
-                                  prefixIcon: const Icon(
-                                    Icons.message_outlined,
-                                    color: Colors.green,
-                                  ),
-                                  border: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.black, width: 1.sp),
-                                      borderRadius:
-                                          BorderRadius.circular(15.sp)),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.blue, width: 1.sp),
-                                      borderRadius:
-                                          BorderRadius.circular(15.sp)),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(5.sp),
-                              child: TextFormField(
-                                controller: user,
-                                keyboardType: TextInputType.text,
-                                maxLines: 1,
-                                style: const TextStyle(color: Colors.black),
-                                decoration: InputDecoration(
-                                  label: const Text("state"),
-                                  labelStyle:
-                                      const TextStyle(color: Colors.blue),
-                                  prefixIcon: const Icon(
-                                    Icons.star_half_outlined,
-                                    color: Colors.green,
-                                  ),
-                                  border: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.black, width: 1.sp),
-                                      borderRadius:
-                                          BorderRadius.circular(15.sp)),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.blue, width: 1.sp),
-                                      borderRadius:
-                                          BorderRadius.circular(15.sp)),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      actions: [
-                        TextButton(
-                            onPressed: () {
-                              if (user.text == "online") {
-                                cubit.addChat(
-                                    name: name.text,
-                                    msg: msg.text,
-                                    image: "images/profile.jpg",
-                                    state: true);
-                              } else {
-                                cubit.addChat(
-                                    name: name.text,
-                                    msg: msg.text,
-                                    image: "images/profile.jpg",
-                                    state: false);
-                              }
-                              Navigator.pop(context);
-                            },
-                            child: Text(
-                              "add",
-                              style: TextStyle(
-                                  color: Colors.green,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 13.sp),
-                            )),
-                        TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text(
-                              "cancel",
-                              style: TextStyle(
-                                  color: Colors.red,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 13.sp),
-                            )),
-                      ],
-                  icon: CircleAvatar(
-                    backgroundImage: const AssetImage("images/profile.jpg"),
-                    radius: 30.sp,
-                  )
-                    ));
+                builder: (context) => Form(
+                  key: _key,
+                  child: AddChatView(name: name,msg: msg,user: user,formKey: _key,cubit: cubit,)
+                ));
           },
           backgroundColor: Colors.green,
           child: const Icon(
