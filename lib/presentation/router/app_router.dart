@@ -3,6 +3,7 @@ import 'package:ahmedtestapp/presentation/screens/splash_screen/splash_screen.da
 import 'package:flutter/material.dart';
 
 import '../../core/change_page/change_page.dart';
+import '../screens/colors_screen/colors_screen.dart';
 import '../screens/home_face_book_screen/home_face_book_screen.dart';
 import '../screens/test_screen/test_screen.dart';
 
@@ -21,6 +22,8 @@ class AppRouter{
         return MaterialPageRoute(builder: (_)=> TestScreen(image: data[1], name: data[0],));
       case homeFaceBook:
         return MaterialPageRoute(builder: (_)=>const HomeFaceBookScreen());
+      case colorsScreen:
+        return MaterialPageRoute(builder: (_)=>const ColorsScreen());
       default:
         return null;
     }

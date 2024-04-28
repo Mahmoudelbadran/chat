@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 part 'home_state.dart';
 class HomeLogic extends Cubit<HomeState> {
@@ -30,7 +31,20 @@ class HomeLogic extends Cubit<HomeState> {
     }
 
   ];
-
+List<Color> dataColors=[
+  Colors.blue,
+  Colors.red,
+  Colors.yellow,
+  Colors.black,
+  Colors.white
+];
+Color backGround=Colors.white;
+// function change color
+  void changeColor({required int index}){
+    backGround=dataColors[index];
+    emit(ChangeColorsState());
+  }
+  // add user
 void addChat({required String name,required String msg,required String image,required bool state}){
   data.add({
     "name":name,
@@ -40,6 +54,12 @@ void addChat({required String name,required String msg,required String image,req
   });
   emit(AddState());
 }
+// delete user
+  void deleteUser({required int index}){
+  data.removeAt(index);
+  emit(DeleteUserState());
+  }
+
 String image="images/x.png";
 void games(int index){
   if(index==0){

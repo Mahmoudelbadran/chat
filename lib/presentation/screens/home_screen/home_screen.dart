@@ -56,16 +56,13 @@ class _HomeScreenState extends State<HomeScreen> {
             IconButton(onPressed: (){
               Navigator.pushNamed(context, homeFaceBook);
             }, icon: const Icon(Icons.pages_rounded,color: Colors.white,)),
-            Icon(
-              Icons.add,
-              size: 20.sp,
-              color: Colors.white,
-            ),
-            Icon(
-              Icons.face,
-              size: 20.sp,
-              color: Colors.white,
+            IconButton(
+              onPressed: (){
+                Navigator.pushNamed(context, colorsScreen);
+              },
+              icon: Icon(Icons.games,color:Colors.white,size: 20.sp,),
             )
+
           ],
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
@@ -116,7 +113,10 @@ class _HomeScreenState extends State<HomeScreen> {
               name: cubit.data[index]['name'],
               msg: cubit.data[index]['msg'],
               image: cubit.data[index]['image'],
-              state: cubit.data[index]['state']),
+              states: cubit.data[index]['state'],
+            index: index,
+          ),
+
         )),
         floatingActionButton: FloatingActionButton(
           onPressed: () {

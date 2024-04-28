@@ -1,4 +1,6 @@
+import 'package:ahmedtestapp/business_logic/home_logic/home_logic.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../core/change_page/change_page.dart';
@@ -7,11 +9,15 @@ class ChatView extends StatelessWidget {
   final String name;
   final String image;
   final String msg;
-  final bool state;
-  const ChatView({Key? key, required this.name, required this.image, required this.msg, required this.state}) : super(key: key);
+  final bool states;
+ final int index;
+  const ChatView({Key? key, required this.name, required this.image, required this.msg, required this.states, required this.index}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    HomeLogic cubit=HomeLogic.get(context);
+    return BlocBuilder<HomeLogic, HomeState>(
+  builder: (context, state) {
     return InkWell(
       onTap: (){
         Navigator.pushNamed(context, testScreen,arguments: [name,image]);
@@ -59,21 +65,32 @@ class ChatView extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Visibility(
-                visible:state ,
-                replacement: CircleAvatar(
-                  backgroundColor: Colors.red,
-                  radius: 5.sp,
-                ),
-                child: CircleAvatar(
-                  backgroundColor: Colors.green,
-                  radius: 5.sp,
-                ),
-              ),
+              child:Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Visibility(
+                    visible:states ,
+                    replacement: CircleAvatar(
+                      backgroundColor: Colors.red,
+                      radius: 5.sp,
+                    ),
+                    child: CircleAvatar(
+                      backgroundColor: Colors.green,
+                      radius: 5.sp,
+                    ),
+                  ),
+                  IconButton(onPressed: (){
+                    cubit.deleteUser(index:index );
+                  }, icon: Icon(Icons.delete_forever,color: Colors.red,size: 20.sp,))
+                ],
+              )
             ),
           ],
         ),
       ),
     );
+  },
+);
   }
 }
